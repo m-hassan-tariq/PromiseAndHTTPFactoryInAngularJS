@@ -1,0 +1,29 @@
+app.factory("webApi", [
+        '$http', '$templateCache', '$q', function ($http, $templateCache, $q) {
+            return {
+                withParameter: function (methodType, webApiUrl, parameterObject) {
+                    var deferred = $q.defer();
+                    $http({
+                        method: methodType,
+                        url: window.location.protocol + '//' + window.location.host + window.location.pathname + webApiUrl,
+                        data: parameterObject,
+                        cache: $templateCache
+                    })
+                    .success(deferred.resolve)
+                    .error(deferred.resolve);
+                    return deferred.promise;
+                },
+                nonParameter: function (methodType, webApiUrl) {
+                    var deferred = $q.defer();
+                    $http({
+                        method: methodType,
+                        url: window.location.protocol + '//' + window.location.host + window.location.pathname + webApiUrl,
+                        cache: $templateCache
+                    })
+                    .success(deferred.resolve)
+                    .error(deferred.resolve);
+                    return deferred.promise;
+                },
+            }
+        }
+    ]);
