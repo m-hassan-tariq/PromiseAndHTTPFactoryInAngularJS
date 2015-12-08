@@ -1,4 +1,4 @@
-# PromiseAndHTTPFactoryInAngularJS
+# HTTP promises in AngularJS Service
 AngularJS: Integration of promises ($q) and $http in factory 
 
 I have integrated promises ($q) with $http services, this will make code more extensible:
