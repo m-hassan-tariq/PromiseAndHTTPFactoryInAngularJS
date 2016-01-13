@@ -10,7 +10,7 @@ app.factory("webApi", [
                         cache: $templateCache
                     })
                     .success(deferred.resolve)
-                    .error(deferred.resolve);
+                    .error(deferred.reject);
                     return deferred.promise;
                 },
                 nonParameter: function (methodType, webApiUrl) {
@@ -20,8 +20,12 @@ app.factory("webApi", [
                         url: window.location.protocol + '//' + window.location.host + window.location.pathname + webApiUrl,
                         cache: $templateCache
                     })
-                    .success(deferred.resolve)
-                    .error(deferred.resolve);
+                    .success(function (data) {
+                        deferred.resolve(data)
+                    })
+                    .error(function (msg) {
+                        deferred.reject(msg)
+                    });
                     return deferred.promise;
                 },
             }
